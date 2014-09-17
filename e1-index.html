@@ -1,0 +1,116 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <!-- jQuery CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    // Equivalent to: $( document ).ready(function() { });
+    $(function() {
+        // #1
+        // Bind the click handler function to the answer buttons
+        $('.answerBtn').click(clickedAnswer);
+
+    });
+
+    // #2
+    function clickedAnswer(e) {
+        var btn = $(e.target);
+
+        // #4 - do after click event and selected
+        // Show adding data- to divs
+        var playerAnswer = $(btn).attr('data-answer');
+        
+        // #3
+        // Remove all click events from the answerBtns, the 
+        // game is over
+        $('.answerBtn').unbind("click");
+
+        // Show the button as selected
+        btn.addClass("selected");
+
+        //#6
+        // Was the player correct?
+        if(playerAnswer == "correct") {
+            // Correct result in green      
+            $('.results p').css('color', '#0d0');     
+        } else {
+            // Incorrect result in red
+            $('.results p').css('color', '#d00');
+
+        }
+
+        // Show results
+        $('.result').html(playerAnswer)
+        $('.results').show();
+
+        
+    }
+
+    </script>
+
+    <style type="text/css">
+        h1 {
+            font-size:21px;
+        }
+        .question {
+            width:400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .answers {
+            width:200px;
+            margin: 0 auto;
+        }
+        .answerBtn {
+            background-color:#C4E0FF;
+            float:left;
+            width:100%;
+            padding:6px;
+            margin-bottom:6px;
+            border:1px solid #000;
+
+             
+        } 
+
+        .answerBtn:hover {
+            transform:scale(2,2);
+            transition: all 1s ease-in-out;
+        }
+        /* #4 part of , make it snazzy! */
+        .answerBtn.selected {
+            border:1px solid #00f;
+            background-color:#7777FF;  
+        }
+
+        .results {
+            float:left;
+            display:none;  
+            clear:both;          
+        }       
+
+    </style>
+
+    <title>Exercise 1</title>
+</head>
+<body>    
+    <!-- #0 -->
+    <div class="question">
+        <h2>"The sky is pink with green poka dots."</h2>
+        <p><em>Is this statement correct?</em></p>
+    </div>
+    <!-- #4 part of  -->
+    <div class="answers">
+        <div class="answerBtn" data-answer="wrong">True</div>
+        <div class="answerBtn" data-answer="correct">False</div>
+        <div class="answerBtn" data-answer="wrong">True</div>
+        <div class="answerBtn" data-answer="correct">False</div>
+    </div>
+    <!-- #6 -->
+    <div class="results">
+        <p>You got the answer <span class="result"></span>!<p>            
+    </div>
+</body>
+</html>
